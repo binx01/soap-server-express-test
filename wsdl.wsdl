@@ -1,0 +1,46 @@
+<definitions
+    name="SoapServer"
+    targetNamespace="urn:SoapServer"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="urn:SoapServer">
+
+    <message name="LoginRequest.Message">
+        <part name="User" type="xsd:string"/>
+        <part name="Password" type="xsd:string"/>
+    </message>
+    <message name="LoginResponse.Message">
+        <part name="LoginResult" type="xsd:string"/>
+    </message>
+    
+    <portType name="SoapServer_PortType">
+        <operation name="Login">
+            <input message="tns:LoginRequest.Message"/>
+            <output message="tns:LoginResponse.Message"/>
+        </operation>
+    </portType>
+
+    <binding name="SoapServer_Binding" type="tns:SoapServer_PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="Login">
+            <soap:operation soapAction="urn:SoapServer#Login"/>
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SoapServer"/>
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SoapServer"/>
+            </output>
+        </operation>        
+    </binding>
+
+    <service name="SoapService">
+        <port name="SoapService_Port" binding="tns:SoapServer_Binding">
+            <soap:address location="http://localhost:8000/soapserver"/>
+        </port>
+    </service>
+
+
+
+
+</definitions>
