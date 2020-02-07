@@ -11,7 +11,7 @@ app.get('/wsdl', (req, res) => {
 app.all('/', (req, res) => {
   res.set('content-type', 'text/xml');
 
-  // envelope created by legacy system
+  // response soap envelope created by legacy system => parsed with no result json object
   const envelope =
     '<?xml version="1.0" encoding="UTF-8"?>' +
     '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns="urn:SoapServer">' +
@@ -22,7 +22,7 @@ app.all('/', (req, res) => {
     '</soap:Body>' +
     '</soap:Envelope>';
 
-  // envelope created according to the soap tutorial
+  // response soap envelope created according to the soap tutorial => parsed with result json object
   const envelope2 =
     '<?xml version="1.0" encoding="utf-8"?>' +
     '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:tns="urn:SoapServer">' +
