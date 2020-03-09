@@ -6,18 +6,18 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:tns="urn:SoapServer">
 
-    <message name="LoginRequest.Message">
+    <message name="LoginRequest">
         <part name="User" type="xsd:string"/>
         <part name="Password" type="xsd:string"/>
     </message>
-    <message name="LoginResponse.Message">
-        <part name="LoginResult" type="xsd:string"/>
+    <message name="LoginResponse">
+        <part name="result" type="xsd:string"/>
     </message>
     
     <portType name="SoapServer_PortType">
         <operation name="Login">
-            <input message="tns:LoginRequest.Message"/>
-            <output message="tns:LoginResponse.Message"/>
+            <input message="tns:LoginRequest"/>
+            <output message="tns:LoginResponse"/>
         </operation>
     </portType>
 
@@ -36,11 +36,7 @@
 
     <service name="SoapService">
         <port name="SoapService_Port" binding="tns:SoapServer_Binding">
-            <soap:address location="http://localhost:8000/soapserver"/>
+            <soap:address location="http://localhost:8000/login"/>
         </port>
     </service>
-
-
-
-
 </definitions>
